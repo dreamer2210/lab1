@@ -14,6 +14,8 @@ void print(double* array, size_t size);
 
 // Добавить элемент в конец массива
 double* task_1(double*& array, size_t& size, double value);
+// Добавить элемент в начало массива
+double* task_2(double*& array, size_t& size, double value);
 
 int main(int argc, char* argv[])
 {
@@ -47,6 +49,7 @@ void menu()
         {
             case 1:
                 cout << "=======================task 1=======================" << endl;
+                print(array, size);
 
                 cin >> value;
                 print(task_1(array, size, value), size);
@@ -56,7 +59,15 @@ void menu()
                 cout << "====================================================" << endl;
                 break;
             case 2:
-                // task_2();
+                cout << "=======================task 2=======================" << endl;
+                print(array, size);
+                
+                cin >> value;
+                print(task_2(array, size, value), size);
+
+                value = double(rand() % 100) / 10;
+                print(task_2(array, size, value), size);
+                cout << "====================================================" << endl;
                 break;
             case 3:
                 // task_3();
@@ -151,4 +162,9 @@ void print(double* array, size_t size)
 double* task_1(double*& array, size_t& size, double value)
 {
     return add_value(array, size, value, size);
+}
+
+double* task_2(double*& array, size_t& size, double value)
+{
+    return add_value(array, size, value, 0);
 }
