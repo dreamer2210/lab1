@@ -20,6 +20,12 @@ double* task_1(double*& array, size_t& size, double value);
 double* task_2(double*& array, size_t& size, double value);
 // Добавить элемент на k-ую позицию
 double* task_3(double*& array, size_t& size, double value, size_t k);
+// Удалить последний элемент массива
+double* task_4(double*& array, size_t& size);
+// Удалить первый элемент массива
+double* task_5(double*& array, size_t& size);
+// Удалить k-ый элемент массива
+double* task_6(double*& array, size_t& size, size_t pos);
 
 int main(int argc, char* argv[])
 {
@@ -88,13 +94,26 @@ void menu()
                 cout << "====================================================" << endl;
                 break;
             case 4:
-                // task_4();
+                cout << "=======================task 4=======================" << endl;
+                print(array, size);
+
+                print(task_4(array, size), size - 1);
+                cout << "====================================================" << endl;
                 break;
             case 5:
-                // task_5();
+                cout << "=======================task 5=======================" << endl;
+                print(array, size);
+
+                print(task_5(array, size), size - 1);
+                cout << "====================================================" << endl;
                 break;
             case 6:
-                // task_6();
+                cout << "=======================task 6=======================" << endl;
+                print(array, size);
+
+                cin >> k;
+                print(task_6(array, size, k), size - 1);
+                cout << "====================================================" << endl;
                 break;
             case 7:
                 // task_7();
@@ -145,7 +164,7 @@ double* get_array(const char* nameFile, size_t& size)
 
 double* add_value(double*& array, size_t& size, double value, size_t pos)
 {
-    double* result = new double[++size];
+    double* result = new double[--size];
 
     for(size_t i = 0, j = 0; i < size; ++i)
     {
@@ -170,10 +189,10 @@ double* del_value(double*& array, size_t& size, size_t pos)
 {
     if(size <= 1)
         return 0;
-    
+
     double* result = new double[--size];
 
-    for(size_t i = 0, j = 0; j < size + 1; ++j)
+    for(size_t i = 0, j = 0; i < size; ++j)
     {
         if(j == pos)
             continue;
@@ -194,10 +213,11 @@ double* del_value(double*& array, size_t& size, double value)
 {
     if(size <= 1)
         return 0;
-    
-    double* result = new double[--size];
+    size--;
 
-    for(size_t i = 0, j = 0; j < size + 1; ++j)
+    double* result = new double[size];
+
+    for(size_t i = 0, j = 0; i < size; ++j)
     {
         if(array[j] == value)
             continue;
@@ -235,4 +255,19 @@ double* task_2(double*& array, size_t& size, double value)
 double* task_3(double*& array, size_t& size, double value, size_t k)
 {
     return add_value(array, size, value, k);
+}
+
+double* task_4(double*& array, size_t& size)
+{
+    return del_value(array, size, (size_t)size - 1);
+}
+
+double* task_5(double*& array, size_t& size)
+{
+    return del_value(array, size, (size_t)0);
+}
+
+double* task_6(double*& array, size_t& size, size_t pos)
+{
+    return del_value(array, size, pos);
 }
