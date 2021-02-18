@@ -10,6 +10,8 @@ void menu();
 
 double* get_array(const char* nameFile, size_t& size);
 double* add_value(double*& array, size_t& size, double value, size_t pos);
+double* del_value(double*& array, size_t& size, size_t pos);
+double* del_value(double*& array, size_t& size, double value);
 void print(double* array, size_t size);
 
 // Добавить элемент в конец массива
@@ -21,6 +23,7 @@ int main(int argc, char* argv[])
 {
     menu();
 
+    //system("pause");
     return 0;
 }
 
@@ -151,6 +154,54 @@ double* add_value(double*& array, size_t& size, double value, size_t pos)
     return array;
 }
 
+double* del_value(double*& array, size_t& size, size_t pos)
+{
+    if(size <= 1)
+        return 0;
+    
+    double* result = new double[--size];
+
+    for(size_t i = 0, j = 0; j < size + 1; ++j)
+    {
+        if(j == pos)
+            continue;
+        else
+        {
+            result[i] = array[j];
+            ++i;
+        }
+    }
+
+    delete[] array;
+    array = result;
+
+    return array;
+}
+
+double* del_value(double*& array, size_t& size, double value)
+{
+    if(size <= 1)
+        return 0;
+    
+    double* result = new double[--size];
+
+    for(size_t i = 0, j = 0; j < size + 1; ++j)
+    {
+        if(array[j] == value)
+            continue;
+        else
+        {
+            result[i] = array[j];
+            ++i;
+        }
+    }
+
+    delete[] array;
+    array = result;
+
+    return array;
+}
+
 void print(double* array, size_t size)
 {
     for(size_t i = 0; i < size; ++i)
@@ -168,3 +219,4 @@ double* task_2(double*& array, size_t& size, double value)
 {
     return add_value(array, size, value, 0);
 }
+
