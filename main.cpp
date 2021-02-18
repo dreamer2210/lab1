@@ -18,6 +18,8 @@ void print(double* array, size_t size);
 double* task_1(double*& array, size_t& size, double value);
 // Добавить элемент в начало массива
 double* task_2(double*& array, size_t& size, double value);
+// Добавить элемент на k-ую позицию
+double* task_3(double*& array, size_t& size, double value, size_t k);
 
 int main(int argc, char* argv[])
 {
@@ -35,6 +37,7 @@ void menu()
     size_t size;
     double* array = get_array(NAME_FILE, size);
     double value;
+    short int k;
 
     if(!array)
     {
@@ -73,7 +76,16 @@ void menu()
                 cout << "====================================================" << endl;
                 break;
             case 3:
-                // task_3();
+                cout << "=======================task 3=======================" << endl;
+                print(array, size);
+
+                cin >> value;
+                cin >> k;
+                print(task_3(array, size, value, k), size);
+
+                value = double(rand() % 100) / 10;
+                print(task_3(array, size, value, k), size);
+                cout << "====================================================" << endl;
                 break;
             case 4:
                 // task_4();
@@ -220,3 +232,7 @@ double* task_2(double*& array, size_t& size, double value)
     return add_value(array, size, value, 0);
 }
 
+double* task_3(double*& array, size_t& size, double value, size_t k)
+{
+    return add_value(array, size, value, k);
+}
