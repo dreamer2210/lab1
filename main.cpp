@@ -65,15 +65,20 @@ void menu()
 
         switch(number)
         {
+            case 0:
+                cout << "Bye bye" << endl;
+                return;
             case 1:
                 cout << "=======================task 1=======================" << endl;
                 print(array, size);
 
+                cout << "Enter value: ";
                 cin >> value;
                 task_1(array, size, value);
                 print(array, size);
 
                 value = double(rand() % 100) / 10;
+                cout << "Random value: " << value << endl;
                 task_1(array, size, value);
                 print(array, size);
                 cout << "====================================================" << endl;
@@ -81,12 +86,14 @@ void menu()
             case 2:
                 cout << "=======================task 2=======================" << endl;
                 print(array, size);
-                
+
+                cout << "Enter value: ";
                 cin >> value;
                 task_2(array, size, value);
                 print(array, size);
 
                 value = double(rand() % 100) / 10;
+                cout << "Random value: " << value << endl;
                 task_2(array, size, value);
                 print(array, size);
                 cout << "====================================================" << endl;
@@ -95,12 +102,15 @@ void menu()
                 cout << "=======================task 3=======================" << endl;
                 print(array, size);
 
+                cout << "Enter value: ";
                 cin >> value;
+                cout << "Enter k (position): ";
                 cin >> k;
                 task_3(array, size, value, k);
                 print(array, size);
 
                 value = double(rand() % 100) / 10;
+                cout << "Random value: " << value << endl;
                 task_3(array, size, value, k);
                 print(array, size);
                 cout << "====================================================" << endl;
@@ -125,6 +135,7 @@ void menu()
                 cout << "=======================task 6=======================" << endl;
                 print(array, size);
 
+                cout << "Enter k (position): ";
                 cin >> k;
                 task_6(array, size, k);
                 print(array, size);
@@ -134,7 +145,10 @@ void menu()
                 cout << "=======================task 7=======================" << endl;
                 print(array, size);
 
-                cin >> value >> value2;
+                cout << "Enter value find: ";
+                cin >> value;
+                cout << "Enter value set: ";
+                cin >> value2;
                 task_7(array, size, value, value2);
                 print(array, size);
                 cout << "====================================================" << endl;
@@ -143,6 +157,7 @@ void menu()
                 cout << "=======================task 8=======================" << endl;
                 print(array, size);
 
+                cout << "Enter value: ";
                 cin >> value;
                 task_8(array, size, value);
                 print(array, size);
