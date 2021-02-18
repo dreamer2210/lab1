@@ -8,6 +8,8 @@ void menu();
 
 double* get_array(const char* nameFile, size_t& size);
 
+double* add_value(double*& array, size_t& size, double value, size_t pos);
+
 int main(int argc, char* argv[])
 {
     
@@ -84,5 +86,28 @@ double* get_array(const char* nameFile, size_t& size)
     file.close();
 
     return result;
+}
+
+double* add_value(double*& array, size_t& size, double value,size_t pos)
+{
+    double* result = new double[++size];
+
+    for(size_t i = 0, j = 0; i < size; ++i)
+    {
+        if(i == pos)
+        {
+            result[pos] = value;
+        }
+        else
+        {
+            result[i] = array[j];
+            ++j;
+        }
+    }
+
+    delete[] array;
+    array = result;
+
+    return array;
 }
 
