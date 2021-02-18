@@ -12,7 +12,7 @@ double* add_value(double*& array, size_t& size, double value, size_t pos);
 
 int main(int argc, char* argv[])
 {
-    
+
 
     system("pause");
     return 0;
@@ -75,6 +75,12 @@ double* get_array(const char* nameFile, size_t& size)
     while(file >> value)
         ++size;
     
+    if(size == 0)
+    {
+        cerr << "Error. File is empty." << endl;
+        return 0;
+    }
+
     file.close();
     file.open(nameFile);
 
