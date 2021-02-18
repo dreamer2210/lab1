@@ -26,6 +26,9 @@ double* task_4(double*& array, size_t& size);
 double* task_5(double*& array, size_t& size);
 // Удалить k-ый элемент массива
 double* task_6(double*& array, size_t& size, size_t pos);
+// Добавить элемент массива после первого встреченного элемента с заданным значением, 
+// если такого значения нет, то выдать предупреждающее сообщение.
+double* task_7(double*& array, size_t& size, double valueFind, double valueSet);
 
 int main(int argc, char* argv[])
 {
@@ -42,7 +45,7 @@ void menu()
     short int number = 1;
     size_t size;
     double* array = get_array(NAME_FILE, size);
-    double value;
+    double value, value2;
     short int k;
 
     if(!array)
@@ -64,10 +67,10 @@ void menu()
                 print(array, size);
 
                 cin >> value;
-                print(task_1(array, size, value), size);
+                print(task_1(array, size, value), size + 1);
 
                 value = double(rand() % 100) / 10;
-                print(task_1(array, size, value), size);
+                print(task_1(array, size, value), size + 1);
                 cout << "====================================================" << endl;
                 break;
             case 2:
@@ -75,10 +78,10 @@ void menu()
                 print(array, size);
                 
                 cin >> value;
-                print(task_2(array, size, value), size);
+                print(task_2(array, size, value), size + 1);
 
                 value = double(rand() % 100) / 10;
-                print(task_2(array, size, value), size);
+                print(task_2(array, size, value), size + 1);
                 cout << "====================================================" << endl;
                 break;
             case 3:
@@ -87,10 +90,10 @@ void menu()
 
                 cin >> value;
                 cin >> k;
-                print(task_3(array, size, value, k), size);
+                print(task_3(array, size, value, k), size + 1);
 
                 value = double(rand() % 100) / 10;
-                print(task_3(array, size, value, k), size);
+                print(task_3(array, size, value, k), size + 1);
                 cout << "====================================================" << endl;
                 break;
             case 4:
@@ -116,7 +119,12 @@ void menu()
                 cout << "====================================================" << endl;
                 break;
             case 7:
-                // task_7();
+                cout << "=======================task 7=======================" << endl;
+                print(array, size);
+
+                cin >> value >> value2;
+                print(task_7(array, size, value, value2), size + 1);
+                cout << "====================================================" << endl;
                 break;
             case 8:
                 // task_8();
@@ -164,7 +172,7 @@ double* get_array(const char* nameFile, size_t& size)
 
 double* add_value(double*& array, size_t& size, double value, size_t pos)
 {
-    double* result = new double[--size];
+    double* result = new double[++size];
 
     for(size_t i = 0, j = 0; i < size; ++i)
     {
@@ -213,9 +221,8 @@ double* del_value(double*& array, size_t& size, double value)
 {
     if(size <= 1)
         return 0;
-    size--;
 
-    double* result = new double[size];
+    double* result = new double[--size];
 
     for(size_t i = 0, j = 0; i < size; ++j)
     {
@@ -270,4 +277,17 @@ double* task_5(double*& array, size_t& size)
 double* task_6(double*& array, size_t& size, size_t pos)
 {
     return del_value(array, size, pos);
+}
+
+double* task_7(double*& array, size_t& size, double valueFind, double valueSet)
+{
+    size_t i;
+
+    for(i = 0; i < size; ++i)
+    {
+        if(array[i] == valueFind)
+            break;
+    }
+
+    return add_value(array, size, valueSet, i + 1);
 }
