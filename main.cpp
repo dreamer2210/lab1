@@ -2,6 +2,8 @@
 #include <fstream>
 #include <vector>
 
+#define NAME_FILE "data.txt"
+
 using namespace std;
 
 void menu();
@@ -9,6 +11,8 @@ void menu();
 double* get_array(const char* nameFile, size_t& size);
 
 double* add_value(double*& array, size_t& size, double value, size_t pos);
+
+void print(double* array, size_t size);
 
 int main(int argc, char* argv[])
 {
@@ -117,3 +121,10 @@ double* add_value(double*& array, size_t& size, double value,size_t pos)
     return array;
 }
 
+void print(double* array, size_t size)
+{
+    for(size_t i = 0; i < size; ++i)
+        cout << array[i] << '\t';
+    
+    cout << endl;
+}
