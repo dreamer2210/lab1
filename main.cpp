@@ -301,11 +301,21 @@ double* task_6(double*& array, size_t& size, size_t pos)
 double* task_7(double*& array, size_t& size, double valueFind, double valueSet)
 {
     size_t i;
+    bool find = false;
 
     for(i = 0; i < size; ++i)
     {
         if(array[i] == valueFind)
+        {
+            find = true;
             break;
+        }
+    }
+
+    if(!find)
+    {
+        cerr << "Value of array not found" << endl;
+        return array;
     }
 
     return add_value(array, size, valueSet, i + 1);
