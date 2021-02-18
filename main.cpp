@@ -1,13 +1,18 @@
 #include <iostream>
+#include <fstream>
+#include <vector>
 
 using namespace std;
 
 void menu();
 
+double* get_array(const char* nameFile, size_t& size);
+
 int main(int argc, char* argv[])
 {
-    menu();
+    
 
+    system("pause");
     return 0;
 }
 
@@ -52,3 +57,32 @@ void menu()
         }
     }
 }
+
+double* get_array(const char* nameFile, size_t& size)
+{
+    fstream file(nameFile);
+    double value;
+    size = 0;
+
+    if(!file)
+    {
+        cerr << "Error. File not found." << endl;
+        return 0;
+    }
+
+    while(file >> value)
+        ++size;
+    
+    file.close();
+    file.open(nameFile);
+
+    double* result = new double[size];
+
+    for(size_t i = 0; i < size; ++i)
+        file >> result[i];
+
+    file.close();
+
+    return result;
+}
+
