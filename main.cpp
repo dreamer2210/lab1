@@ -1,6 +1,6 @@
 #include <iostream>
 #include <fstream>
-#include <vector>
+#include <ctime>
 
 #define NAME_FILE "data.txt"
 
@@ -9,22 +9,34 @@ using namespace std;
 void menu();
 
 double* get_array(const char* nameFile, size_t& size);
-
 double* add_value(double*& array, size_t& size, double value, size_t pos);
-
 void print(double* array, size_t size);
+
+// Добавить элемент в конец массива
+double* task_1(double*& array, size_t& size, double value);
 
 int main(int argc, char* argv[])
 {
+    menu();
 
-
-    system("pause");
     return 0;
 }
 
 void menu()
 {
+    srand(time(0));
+
     short int number = 1;
+    size_t size;
+    double* array = get_array(NAME_FILE, size);
+    double value;
+
+    if(!array)
+    {
+        cerr << "Array is 0" << endl;
+        system("pause");
+        return;
+    }
 
     while(number != 0)
     {
@@ -34,7 +46,14 @@ void menu()
         switch(number)
         {
             case 1:
-                // task_1();
+                cout << "=======================task 1=======================" << endl;
+
+                cin >> value;
+                print(task_1(array, size, value), size);
+
+                value = double(rand() % 100) / 10;
+                print(task_1(array, size, value), size);
+                cout << "====================================================" << endl;
                 break;
             case 2:
                 // task_2();
@@ -98,7 +117,7 @@ double* get_array(const char* nameFile, size_t& size)
     return result;
 }
 
-double* add_value(double*& array, size_t& size, double value,size_t pos)
+double* add_value(double*& array, size_t& size, double value, size_t pos)
 {
     double* result = new double[++size];
 
@@ -127,4 +146,9 @@ void print(double* array, size_t size)
         cout << array[i] << '\t';
     
     cout << endl;
+}
+
+double* task_1(double*& array, size_t& size, double value)
+{
+    return add_value(array, size, value, size);
 }
