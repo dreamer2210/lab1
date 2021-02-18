@@ -29,6 +29,9 @@ double* task_6(double*& array, size_t& size, size_t pos);
 // Добавить элемент массива после первого встреченного элемента с заданным значением, 
 // если такого значения нет, то выдать предупреждающее сообщение.
 double* task_7(double*& array, size_t& size, double valueFind, double valueSet);
+// Удалить все элементы массива с заданным значением, 
+// если такого значения нет, то выдать предупреждающее сообщение.
+double* task_8(double*& array, size_t& size, double value);
 
 int main(int argc, char* argv[])
 {
@@ -67,10 +70,12 @@ void menu()
                 print(array, size);
 
                 cin >> value;
-                print(task_1(array, size, value), size + 1);
+                task_1(array, size, value);
+                print(array, size);
 
                 value = double(rand() % 100) / 10;
-                print(task_1(array, size, value), size + 1);
+                task_1(array, size, value);
+                print(array, size);
                 cout << "====================================================" << endl;
                 break;
             case 2:
@@ -78,10 +83,12 @@ void menu()
                 print(array, size);
                 
                 cin >> value;
-                print(task_2(array, size, value), size + 1);
+                task_2(array, size, value);
+                print(array, size);
 
                 value = double(rand() % 100) / 10;
-                print(task_2(array, size, value), size + 1);
+                task_2(array, size, value);
+                print(array, size);
                 cout << "====================================================" << endl;
                 break;
             case 3:
@@ -90,24 +97,28 @@ void menu()
 
                 cin >> value;
                 cin >> k;
-                print(task_3(array, size, value, k), size + 1);
+                task_3(array, size, value, k);
+                print(array, size);
 
                 value = double(rand() % 100) / 10;
-                print(task_3(array, size, value, k), size + 1);
+                task_3(array, size, value, k);
+                print(array, size);
                 cout << "====================================================" << endl;
                 break;
             case 4:
                 cout << "=======================task 4=======================" << endl;
                 print(array, size);
 
-                print(task_4(array, size), size - 1);
+                task_4(array, size);
+                print(array, size);
                 cout << "====================================================" << endl;
                 break;
             case 5:
                 cout << "=======================task 5=======================" << endl;
                 print(array, size);
 
-                print(task_5(array, size), size - 1);
+                task_5(array, size);
+                print(array, size);
                 cout << "====================================================" << endl;
                 break;
             case 6:
@@ -115,7 +126,8 @@ void menu()
                 print(array, size);
 
                 cin >> k;
-                print(task_6(array, size, k), size - 1);
+                task_6(array, size, k);
+                print(array, size);
                 cout << "====================================================" << endl;
                 break;
             case 7:
@@ -123,11 +135,18 @@ void menu()
                 print(array, size);
 
                 cin >> value >> value2;
-                print(task_7(array, size, value, value2), size + 1);
+                task_7(array, size, value, value2);
+                print(array, size);
                 cout << "====================================================" << endl;
                 break;
             case 8:
-                // task_8();
+                cout << "=======================task 8=======================" << endl;
+                print(array, size);
+
+                cin >> value;
+                task_8(array, size, value);
+                print(array, size);
+                cout << "====================================================" << endl;
                 break;
             default:
                 cout << "Try again" << endl;
@@ -290,4 +309,26 @@ double* task_7(double*& array, size_t& size, double valueFind, double valueSet)
     }
 
     return add_value(array, size, valueSet, i + 1);
+}
+
+double* task_8(double*& array, size_t& size, double value)
+{
+    size_t i, count = 0;
+
+    for(i = 0; i < size; ++i)
+    {
+        if(array[i] == value)
+            ++count;
+    }
+
+    if(count == 0)
+    {
+        cerr << "Value of array not found" << endl;
+        return array;
+    }
+
+    for(i = 0; i < count; ++i)
+        del_value(array, size, value);
+
+    return array;
 }
